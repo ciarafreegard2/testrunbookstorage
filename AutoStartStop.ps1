@@ -1,8 +1,13 @@
 
-Write-Output "Connecting to azure via  Connect-AzAccount -Identity" 
-Connect-AzAccount -Identity 
-Write-Output "Successfully connected with Automation account's Managed Identity" 
-
+try
+{
+    "Logging in to Azure..."
+    Connect-AzAccount -Identity
+}
+catch {
+    Write-Error -Message $_.Exception
+    throw $_.Exception
+}
 
 Write-Output "Starting on $(Get-Date)"
 $currenttime = Get-Date -Format HH
